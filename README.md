@@ -14,7 +14,7 @@ Then open http://localhost:8765. For a phone, host the `public/` directory on an
 
 Use the browser’s “Add to Home Screen” or “Install” action to use it like an app. Each browser/device has its own independent planner data.
 
-The repository is configured to deploy the `public/` folder through GitHub Pages after pushes to `main`. The Pages address is shown in the repository’s Actions or Pages settings once the first deployment completes.
+The `public/` folder can be deployed directly with GitHub Pages or any static host. The app does not require a backend.
 
 ## Use
 
