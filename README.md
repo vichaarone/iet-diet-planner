@@ -14,7 +14,7 @@ Then open http://localhost:8765. For a phone, host the `public/` directory on an
 
 Use the browser’s “Add to Home Screen” or “Install” action to use it like an app. Each browser/device has its own independent planner data.
 
-The `public/` folder can be deployed directly with GitHub Pages or any static host. The app does not require a backend.
+The live GitHub Pages app is [vichaarone.github.io/iet-diet-planner](https://vichaarone.github.io/iet-diet-planner/). The `public/` folder can also be deployed directly to any static host. The app does not require a backend.
 
 ## Use
 
