@@ -1,16 +1,20 @@
 # IET — your everyday table
 
-A personal Indian-food planner with weekly/monthly goals, simple recipe swaps, a generated grocery checklist, receipt-based budget tracking, and weight/waist/protein/workout check-ins.
+A private, local-first Indian-food planner with weekly/monthly goals, simple recipe swaps, a generated grocery checklist, receipt-based budget tracking, and weight/waist/protein/workout check-ins.
 
 ## Run
 
+It is a static installable PWA. Open the hosted app in any modern browser, or serve the `public/` directory locally:
+
 ```sh
-python3 server.py
+python3 -m http.server 8765 --directory public
 ```
 
-Open http://localhost:8765 on your laptop. On your phone, open `http://YOUR-LAPTOP-WIFI-IP:8765` on the same trusted Wi-Fi. Enter the private access code printed in the terminal; it is also stored in `.data/access-code.txt`. The laptop and server must remain running. macOS may ask to allow local network access. Guest/student Wi-Fi can block connections between devices.
+Then open http://localhost:8765. For a phone, host the `public/` directory on any static host or use a local server reachable from that device. No Python backend, account, database or network connection is required after the files load.
 
-No packages, build step, paid API or account needed. Python 3.10+ is sufficient. This is a private LAN app, not an internet deployment: do not forward the port publicly. Remote hosting would require HTTPS and an appropriate production server. HTTP on the local network is unencrypted.
+Use the browser’s “Add to Home Screen” or “Install” action to use it like an app. Each browser/device has its own independent planner data.
+
+The repository is configured to deploy the `public/` folder through GitHub Pages after pushes to `main`. The Pages address is shown in the repository’s Actions or Pages settings once the first deployment completes.
 
 ## Use
 
@@ -18,23 +22,22 @@ No packages, build step, paid API or account needed. Python 3.10+ is sufficient.
 - **Meal plan:** choose a week/day, swap between 20 meal options, and open complete recipes with equipment, ingredient quantities, seasoning amounts, numbered cooking steps, timings and make-ahead notes. All quantities are raw/dry except where labelled otherwise. Nutrition is approximate and reflects the plan, not actual consumption.
 - **Groceries:** ingredients sum across the selected week. Check off what is ready, add extras and record receipts. Illustrative ingredient costs are not live prices or pack prices; the calendar-month budget uses actual logged spending.
 - **Overview / Progress:** create goals for the current Monday-start week or calendar month. Gym/prep/protein goals count daily check-ins; manual goals support check-offs. Each date has one check-in, and the Edit button updates it. Dates are fixed when editing an existing entry; a new check-in cannot silently overwrite an existing date. Blank metrics are not zero. Workout/prep tracking supports one session per day.
-- **Both devices:** updates save to the shared SQLite database and refresh when the browser regains focus. Simultaneous edits to the same record use the last successful save. Unrelated records are never overwritten as a whole-state snapshot.
+- **Privacy:** data stays in that browser’s local storage. There is no login, server database or automatic sync. Two devices remain separate unless you manually export a backup from one and import it on the other.
 
 The current meal template is a starting point, not a guarantee of any calorie deficit or a nutritionally complete prescription. Targets remain editable. Your usual large shake is included as a meal, not added on top of a complete breakfast.
 
 ## Data
 
-Personal data and credentials stay in `.data/` (excluded from git). Use Settings → Download data backup for a readable JSON export. For a complete restorable backup, stop the server and copy the entire `.data` directory; restore that directory before restarting. Do not share the access-code file. To rotate the code, stop the server, replace its contents with a new random value, and restart; existing cookies then expire effectively.
+Use Settings → Download data backup for a JSON copy of the current device’s planner. Use Import backup to restore or manually move that data to another device. Clearing browser storage, using a different browser, or uninstalling the PWA can remove local data, so keep backups you care about.
 
 ## Check
 
 ```sh
 node test_core.mjs
 node test_recipe_view.mjs
-python3 -m unittest test_server.py
 ```
 
-The server test uses a temporary database and local ephemeral port. It checks authentication, cross-origin rejection, validation, independent-device reads and persisted records. Node checks cover nutrition, grocery aggregation/swaps, calendar boundaries, goals and weight averages. No test libraries required.
+The checks cover nutrition, grocery aggregation/swaps, calendar boundaries, goals, weight averages and rendering complete recipe methods. No test libraries are required.
 
 ## Sources
 
