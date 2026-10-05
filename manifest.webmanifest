@@ -1,0 +1,10 @@
+{
+  "name": "IET — Your Everyday Table",
+  "short_name": "IET",
+  "description": "A private, local-first Indian food and fitness planner.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f8f2",
+  "theme_color": "#193e32",
+  "icons": [{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
